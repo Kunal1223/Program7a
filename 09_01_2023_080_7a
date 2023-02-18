@@ -1,0 +1,88 @@
+#include <stdio.h>       //adding the header file
+#include <stdlib.h>
+#define size 100          //define the size of the array
+
+void enqueue();               // prototype of enqueue function
+void dequeue();             // prototype of dequeue function
+void show();                    // prototype of display function
+
+int arr[size];
+int rear = -1;                       //set the value of the rear and front
+int front = -1;
+
+int main()
+{
+    int ch;
+    while (1)              //initialize the while loop
+    {
+        printf("1 Enqueue\n2 Dequeue\n3 Display\n4 Exit\n");
+        printf("Enter your choice of operation:");
+        scanf("%d", &ch);
+        switch (ch)                // intialize the switch case
+        {
+        case 1:
+            enqueue();
+            break;
+
+        case 2:
+            dequeue();
+            break;
+        case 3:
+            show();
+            break;
+        case 4:
+            exit(0);
+            break;
+        default:
+            printf("Incorrect choice\n");
+        }                                                         // switch ends
+    }                                                           // while ends
+}
+
+void enqueue()        // function to insert element in the queue
+{
+    int item;
+    if (rear == size - 1)
+        printf("Overflow\n");
+
+    else
+    {
+        if (front == -1)
+            front = 0;
+
+        printf("Element to be inserted in the queue\n");
+        scanf("%d", &item);
+
+        rear = rear + 1;                  //increase the value of rear
+        arr[rear] = item;                //set the value of rear is equal of item
+    }
+}
+
+void dequeue()
+{
+    if (front == -1 || front > rear)
+    {
+        printf("Underflow\n");
+        return;
+    }
+
+    else
+    {
+        printf("Element deleted from the queue: %d\n", arr[front]);
+        front = front + 1;
+    }
+}
+
+void show()
+{
+    if (front == -1)
+        printf("Empty Queue\n");
+    else
+    {
+        printf("Queue:\n");
+        for (int i = front; i <= rear; i++)
+            printf("%d", arr[i]);
+
+        printf("\n");
+    }
+}
